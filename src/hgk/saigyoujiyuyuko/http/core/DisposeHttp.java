@@ -42,22 +42,14 @@ public class DisposeHttp implements Runnable{
 				case "/":
 					 this.html = Var.hpMaker.Make(200, Var.file.ReadFile("static/hello.html"));
 					break;
-					
-				case "/qwq/":
-					this.html = Var.hpMaker.Make(200,"测试一下路由");
-					break;
 
 				default:
 					this.html = Var.hpMaker.Make(200, Var.file.ReadFile("static/hello.html"));
 					break;
 				}				
 				
-				
 				//Send
 				try {bWriter.write(this.html); } catch (IOException e) { Var.logger.info("读取主页失败: I/O错误", Var.ERROR); e.printStackTrace(); }
-				
-				//flush
-				this.bWriter.flush();
 				
 				//Close
 				this.bWriter.close();
