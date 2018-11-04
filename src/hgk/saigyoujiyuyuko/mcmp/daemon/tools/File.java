@@ -1,9 +1,14 @@
 package hgk.saigyoujiyuyuko.mcmp.daemon.tools;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class File {
 	
@@ -30,4 +35,21 @@ public class File {
 	    bReader.close();
 		return content;
 	}
+	
+	
+	/**
+	 * @param file 文件对象
+	 * @param Path 文件路径[不包含文件名]
+	 * @param put 写入内容
+	 */
+	
+	public void WriteFile(java.io.File file,String Path,String put) {
+		try {
+			String FileContent = Var.file.ReadFile(Path + file.getName());
+			BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+			bWriter.write(FileContent + put);
+			bWriter.close();
+		} catch (IOException e) {e.printStackTrace(); Var.logger.info("日志文件读/写失败", Var.ERROR);}
+	}
+	
 }

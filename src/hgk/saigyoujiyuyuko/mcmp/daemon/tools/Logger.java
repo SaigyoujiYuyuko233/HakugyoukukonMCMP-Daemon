@@ -1,9 +1,49 @@
 package hgk.saigyoujiyuyuko.mcmp.daemon.tools;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
+
 public class Logger {
+	File logFile =null;
+	
+	
+	public Logger() {
+		
+		/**
+		 * 记录-初始化
+		 */
+		try {
+			//文件夹
+			java.io.File path =new java.io.File("log/");
+			
+			if (path.exists() == false) {
+				path.mkdirs();
+			}
+			
+			int fileNumber = path.listFiles().length;
+			
+			//文件
+			java.io.File file =new java.io.File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + ".log" );
+			
+			if (file.exists() == true) {
+				java.io.File newName =new File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + "-" + fileNumber + ".log");
+				file.renameTo(newName);
+			}
+			
+			file.createNewFile();
+			this.logFile = file;
+		}catch (IOException e) {e.printStackTrace();}
+		
+	}
+	
+	
 	
 	/**
 	 * @param log 输出内容
@@ -12,6 +52,7 @@ public class Logger {
 	 * @return 日志
 	 */
 	public void info(String log,int level) {
+		
 		//获取时间和线程名字
 		String date =new SimpleDateFormat("hh:mm:ss").format(new Date());
 		
@@ -38,7 +79,16 @@ public class Logger {
 			break;
 		}
 		
-		System.out.println("[" + date + "/" + threadName + " " + levelName + "] " + log);
+		String out = "[" + date + "/" + threadName + " " + levelName + "] " + log;
+		
+		System.out.println(out);
+		
+		try {
+			String FileContent = Var.file.ReadFile("log/" + this.logFile.getName());
+			BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.logFile), "UTF-8"));
+			bWriter.write(FileContent + out);
+			bWriter.close();
+		} catch (IOException e) {e.printStackTrace(); this.info("日志文件读/写失败", Var.ERROR);}
+		
 	}
-	
 }
