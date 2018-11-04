@@ -2,18 +2,19 @@ package hgk.saigyoujiyuyuko.mcmp.daemon.main;
 
 import java.io.IOException;
 
+import hgk.saigyoujiyuyuko.http.core.Http;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Loading libraries, please wait...");
-		System.out.println(Var.logger.info("Hakugyoukukon MC Server management - Daemon", 0));
-		System.out.println(Var.logger.info("CopyRight (C) 2017-2018 HakugyoukuKonStudio All Right Reserved.", 0));
+		Var.logger.info("Hakugyoukukon MC Server management - Daemon", 0);
+		Var.logger.info("CopyRight (C) 2017-2018 HakugyoukuKonStudio All Right Reserved.", 0);
 		
 		/**
 		 * Read Config
 		 */
-		System.out.println(Var.logger.info("Reading the Config", 0));
+		Var.logger.info("Reading the Config", Var.INFO);
 		
 		//read
 		Var.iniEditor.load("Config.ini");
@@ -22,8 +23,20 @@ public class Main {
 		Var.key = Var.iniEditor.get("Server", "key");
 		
 		/**
+		 * GC Thread
+		 */
+		Var.logger.info("Starting the GC thread", Var.INFO);
+		new Thread(Var.gThread).start();
+		
+		/**
 		 * Start Web Server
 		 */
-		System.out.println(Var.logger.info("Starting the Web Server", 0));
+		Var.logger.info("Starting the Web Server", Var.INFO);
+		
+		Var.http =new Http();
+		new Thread(Var.http).setName("Http");
+		new Thread(Var.http).start();
+		
+		Var.logger.info("Server is running on port: " + Var.port, Var.INFO);
 	}
 }

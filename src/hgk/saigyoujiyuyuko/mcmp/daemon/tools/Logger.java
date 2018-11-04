@@ -11,7 +11,7 @@ public class Logger {
 	 * 
 	 * @return 日志
 	 */
-	public String info(String log,int level) {
+	public void info(String log,int level) {
 		//获取时间和线程名字
 		String date =new SimpleDateFormat("hh:mm:ss").format(new Date());
 		
@@ -38,7 +38,7 @@ public class Logger {
 			break;
 		}
 		
-		return "[" + date + "/" + threadName + " " + levelName + "] " + log;
+		System.out.println("[" + date + "/" + threadName + " " + levelName + "] " + log);
 	}
 	
 }
