@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class HttpProtocolMaker {
+	public int httpCode = 200;
 	
 	/**
 	 * @param httpCode 状态码
@@ -16,6 +17,7 @@ public class HttpProtocolMaker {
 	public String Make(int httpCode,String body) {
 		String html = "";
 		String header = "HTTP/1.1 " + httpCode + " OK\r\n";
+		this.httpCode = httpCode;
 		
 		header =header + "Server: SaigyoujiYuyukoHttpServer\r\n";
 		header =header + "Accept-Ranges: bytes\r\n";
@@ -30,6 +32,10 @@ public class HttpProtocolMaker {
 		
 		html =header + "\r\n" + body;
 		return html;
+	}
+	
+	public int getCode() {
+		return this.httpCode;
 	}
 	
 }
