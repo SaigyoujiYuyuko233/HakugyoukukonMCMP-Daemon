@@ -27,18 +27,35 @@ public class Logger {
 				path.mkdirs();
 			}
 			
-			int fileNumber = path.listFiles().length;
-			
 			//文件
 			java.io.File file =new java.io.File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + ".log" );
 			
 			if (file.exists() == true) {
-				java.io.File newName =new File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + "-" + fileNumber + ".log");
+				
+				/**
+				 * 判断同名文件数量
+				 */
+				
+				//计数器
+				int sameFileNumber = 0;
+				for (int i = 0; i < path.listFiles().length; i++) {
+					//文件名
+					String filename = path.listFiles()[i].getName();
+					
+					if (filename.contains(new SimpleDateFormat("M-d-H").format(new Date()))) {
+						sameFileNumber++;
+					}
+				}
+				
+				//重命名
+				java.io.File newName =new File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + "-" + sameFileNumber + ".log");
 				file.renameTo(newName);
 			}
 			
+			//创建文件
 			file.createNewFile();
 			this.logFile = file;
+			
 		}catch (IOException e) {e.printStackTrace();}
 		
 	}
