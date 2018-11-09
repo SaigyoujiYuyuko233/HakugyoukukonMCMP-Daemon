@@ -26,7 +26,10 @@ public class Http implements Runnable{
 				this.socket =Var.serverSocket.accept();
 				
 				//Run Thread
-				new Thread(new DisposeHttp(this.socket)).start();
+				DisposeHttp disposeHttp = new DisposeHttp(this.socket);
+				
+				//start and rename
+				new Thread(disposeHttp,"Http").start();
 				
 			} catch (IOException e) { Var.logger.info("无法接受连接: I/O错误",Var.ERROR); e.printStackTrace(); }
 			/*===========================*/
