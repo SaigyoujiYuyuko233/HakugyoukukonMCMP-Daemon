@@ -73,7 +73,7 @@ public class ServerAdd implements HttpHandler{
 		//数据目录
 		File serversPath =new File("Servers");
 		if (serversPath.exists() == false) {
-			Var.logger.info("Create the data path", Var.INFO);
+			Var.logger.info("Create the data dir", Var.INFO);
 			serversPath.mkdirs();
 		}
 		

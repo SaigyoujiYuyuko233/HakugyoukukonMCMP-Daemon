@@ -28,7 +28,7 @@ public class Logger {
 			}
 			
 			//文件
-			java.io.File file =new java.io.File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + ".log" );
+			java.io.File file =new java.io.File("log/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".log" );
 			
 			if (file.exists() == true) {
 				
@@ -42,13 +42,13 @@ public class Logger {
 					//文件名
 					String filename = path.listFiles()[i].getName();
 					
-					if (filename.contains(new SimpleDateFormat("M-d-H").format(new Date()))) {
+					if (filename.contains(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
 						sameFileNumber++;
 					}
 				}
 				
 				//重命名
-				java.io.File newName =new File("log/" + new SimpleDateFormat("M-d-H").format(new Date()) + "-" + sameFileNumber + ".log");
+				java.io.File newName =new File("log/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "-" + sameFileNumber + ".log");
 				file.renameTo(newName);
 			}
 			
