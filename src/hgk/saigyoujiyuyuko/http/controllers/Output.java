@@ -15,7 +15,6 @@ import hgk.saigyoujiyuyuko.mcmp.daemon.core.Container;
 public class Output implements HttpHandler{
 	Map<String, String> getMap =new HashMap<String,String>();
 
-	@SuppressWarnings({ "static-access", "unused" })
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
 		
@@ -41,8 +40,8 @@ public class Output implements HttpHandler{
 			oStream.write(response.getBytes());
 			
 			//logger
-	        //String loggerContent = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " NullValue";
-	        //Var.logger.info(loggerContent, Var.WARN);
+	        String loggerContent = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " NullValue";
+	        Var.logger.info(loggerContent, Var.WARN);
 			
 			oStream.close();
 			return;
@@ -97,7 +96,13 @@ public class Output implements HttpHandler{
 		
         OutputStream os = exchange.getResponseBody();
         
+        //Logger
+        //String loggerWeb = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " 200 OK";
+        //Var.logger.info(loggerWeb, Var.INFO);
+        
         String response = container.getOutput().replace("INFO", "<font color=\"#4be170\">信息</font>");
+        response = response.replace("WARN", "<font color=\"#e1cc3e\">警告</font>");
+        response = response.replace("ERROR", "<font color=\"#e13828\">错误</font>");
         //System.out.println(response);
         
         os.write(response.getBytes());

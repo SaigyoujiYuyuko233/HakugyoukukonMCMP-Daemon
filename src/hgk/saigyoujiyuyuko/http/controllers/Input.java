@@ -42,8 +42,8 @@ public class Input implements HttpHandler{
 			oStream.write(response.getBytes());
 			
 			//logger
-	        //String loggerContent = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " NullValue";
-	        //Var.logger.info(loggerContent, Var.WARN);
+	        String loggerWeb = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " NullValue";
+	        Var.logger.info(loggerWeb, Var.WARN);
 			
 			oStream.close();
 			return;
@@ -100,6 +100,13 @@ public class Input implements HttpHandler{
 		 */
 		
 		container.send(cmd);
+		
+		//logger
+        String loggerRunning = "[" + uuid + "] Run command: " + cmd;
+        Var.logger.info(loggerRunning, Var.INFO);
+        
+        //String loggerWeb = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " 200 OK";
+        //Var.logger.info(loggerWeb, Var.INFO);
 		
 		/**
 		 * 随便发点

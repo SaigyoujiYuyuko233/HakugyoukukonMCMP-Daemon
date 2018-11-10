@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
-@SuppressWarnings("unused")
+
 public class Container implements Runnable{
 	Process process = null;
 	BufferedReader bReader = null;
@@ -21,7 +21,6 @@ public class Container implements Runnable{
 	}
 	
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 		try {
@@ -31,13 +30,11 @@ public class Container implements Runnable{
 			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(), "GBK"));
 			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "GBK"));
 			
+			this.bWriter.write("cd Servers/"+uuid+" \n");
+			this.bWriter.flush();  //这个是重中之重啊!!!!
+			
 			//读
 			new Thread(new Reader(this.uuid)).start();
-			
-			//写
-			//this.write =new Write(this.uuid);
-			//new Thread(this.write).start();
-			
 			
 			
 		} catch (IOException e) {Var.logger.info("容器 I/O异常", Var.ERROR);e.printStackTrace();}
