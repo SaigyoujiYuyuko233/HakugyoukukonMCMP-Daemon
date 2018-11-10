@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 
 import hgk.saigyoujiyuyuko.http.controllers.MainPage;
+import hgk.saigyoujiyuyuko.http.controllers.ServerAdd;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class Http implements Runnable{
@@ -21,7 +22,17 @@ public class Http implements Runnable{
 
 	@Override
 	public void run() {
+		/**
+		 * 路由
+		 */
+		
 		Var.httpServer.createContext("/",new MainPage());
+		Var.httpServer.createContext("/ServerAdd", new ServerAdd());
+		
+		/**
+		 * 启动
+		 */
+		
 		Var.httpServer.start();
 	}
 	
