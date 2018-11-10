@@ -6,7 +6,9 @@ import java.net.InetSocketAddress;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 
+import hgk.saigyoujiyuyuko.http.controllers.Input;
 import hgk.saigyoujiyuyuko.http.controllers.MainPage;
+import hgk.saigyoujiyuyuko.http.controllers.Output;
 import hgk.saigyoujiyuyuko.http.controllers.ServerAdd;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
@@ -28,6 +30,9 @@ public class Http implements Runnable{
 		
 		Var.httpServer.createContext("/",new MainPage());
 		Var.httpServer.createContext("/ServerAdd", new ServerAdd());
+		Var.httpServer.createContext("/ServerConsole/Output", new Output());
+		Var.httpServer.createContext("/ServerConsole/Input", new Input());
+
 		
 		/**
 		 * 启动

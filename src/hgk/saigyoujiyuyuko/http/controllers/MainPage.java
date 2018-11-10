@@ -13,6 +13,7 @@ public class MainPage implements com.sun.net.httpserver.HttpHandler{
 	/**
 	 * 欢迎页
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
         String response = Var.file.ReadFile("static/hello.html");
@@ -28,7 +29,7 @@ public class MainPage implements com.sun.net.httpserver.HttpHandler{
         int port = exchange.getRemoteAddress().getPort();
         
         String loggerContent = ip + ":" + port + "->"+ Var.port + " " + exchange.getProtocol() + " " + exchange.getRequestURI() + " 200 OK";
-        Var.logger.info(loggerContent, Var.INFO);
+        //Var.logger.info(loggerContent, Var.INFO);
 	}
 
 }

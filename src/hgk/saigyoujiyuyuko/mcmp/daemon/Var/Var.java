@@ -1,9 +1,13 @@
 package hgk.saigyoujiyuyuko.mcmp.daemon.Var;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sun.net.httpserver.HttpServer;
 
 import ch.ubique.inieditor.IniEditor;
 import hgk.saigyoujiyuyuko.http.core.Http;
+import hgk.saigyoujiyuyuko.mcmp.daemon.core.Container;
 import hgk.saigyoujiyuyuko.mcmp.daemon.tools.EncodingConversion;
 import hgk.saigyoujiyuyuko.mcmp.daemon.tools.File;
 import hgk.saigyoujiyuyuko.mcmp.daemon.tools.Logger;
@@ -30,6 +34,9 @@ public class Var {
 	public static final int INFO = 0;
 	public static final int WARN = 1;
 	public static final int ERROR = 2;
+	
+	//Conteiner
+	public static Map<String, Container> conteinerMap =new HashMap<String, Container>();
 	
 	
 	/**
