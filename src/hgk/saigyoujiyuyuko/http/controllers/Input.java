@@ -16,7 +16,6 @@ import hgk.saigyoujiyuyuko.mcmp.daemon.core.Container;
 public class Input implements HttpHandler{
 	Map<String, String> getMap = new HashMap<>();
 	
-	@SuppressWarnings("unused")
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
 		
@@ -86,10 +85,14 @@ public class Input implements HttpHandler{
 		if (Var.conteinerMap.get(uuid) == null) {
 			//实例化
 			Container container = new Container(uuid);
-			new Thread(container).start();
+			Thread thread = new Thread(container);
 			
 			//放入Map
 			Var.conteinerMap.put(uuid, container);
+			Var.threadMap.put(uuid, thread);
+			
+			//启动
+			thread.start();
 		}
 		
 		Container container = Var.conteinerMap.get(uuid);
@@ -109,7 +112,7 @@ public class Input implements HttpHandler{
         //Var.logger.info(loggerWeb, Var.INFO);
 		
 		/**
-		 * 随便发点
+		 * 随便发点东西
 		 */
 		
         OutputStream os = exchange.getResponseBody();

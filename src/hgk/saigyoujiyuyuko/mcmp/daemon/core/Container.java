@@ -24,11 +24,19 @@ public class Container implements Runnable{
 	@Override
 	public void run() {
 		try {
+			String osName = System.getProperties().getProperty("os.name");
 			
-			this.process = new ProcessBuilder("cmd").start();
+			if (osName.contains("indows")) {
+				this.process = new ProcessBuilder("cmd").start();
+			}
 			
-			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(), "GBK"));
-			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "GBK"));
+			if (osName.contains("inux")) {
+				this.process = new ProcessBuilder("/bin/bash").start();
+			}
+			
+			
+			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(), "UTF-8"));
+			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "UTF-8"));
 			
 			this.bWriter.write("cd Servers/"+uuid+" \n");
 			this.bWriter.flush();  //这个是重中之重啊!!!!

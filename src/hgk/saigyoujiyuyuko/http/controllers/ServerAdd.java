@@ -1,8 +1,11 @@
 package hgk.saigyoujiyuyuko.http.controllers;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,9 +98,16 @@ public class ServerAdd implements HttpHandler{
 		if (status == true) {
 			Var.logger.info("Successful create server: " + uuid, Var.INFO);
 		}else {
-			Var.logger.info("failure create server: " + uuid, Var.INFO);
+			Var.logger.info("failure create server: " + uuid, Var.WARN);
 		}
 		
+		//eula
+		File eula =new File("Servers/" + uuid + "/eula.txt");
+		eula.createNewFile();
+		
+		BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(eula), "UTF-8"));
+		bWriter.write("eula=true");
+		bWriter.close();
 		
 		/**
 		 * 随便返回点东西===========================================

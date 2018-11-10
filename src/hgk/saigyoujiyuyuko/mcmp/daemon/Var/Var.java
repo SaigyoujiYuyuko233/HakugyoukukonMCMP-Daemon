@@ -37,6 +37,7 @@ public class Var {
 	
 	//Conteiner
 	public static Map<String, Container> conteinerMap =new HashMap<String, Container>();
+	public static Map<String, Thread> threadMap =new HashMap<String, Thread>();
 	
 	
 	/**

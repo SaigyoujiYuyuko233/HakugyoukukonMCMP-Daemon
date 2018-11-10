@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 
+import hgk.saigyoujiyuyuko.http.controllers.DeleteServer;
 import hgk.saigyoujiyuyuko.http.controllers.Input;
 import hgk.saigyoujiyuyuko.http.controllers.MainPage;
 import hgk.saigyoujiyuyuko.http.controllers.Output;
@@ -30,6 +31,7 @@ public class Http implements Runnable{
 		
 		Var.httpServer.createContext("/",new MainPage());
 		Var.httpServer.createContext("/ServerAdd", new ServerAdd());
+		Var.httpServer.createContext("/ServerDelete", new DeleteServer());
 		Var.httpServer.createContext("/ServerConsole/Output", new Output());
 		Var.httpServer.createContext("/ServerConsole/Input", new Input());
 

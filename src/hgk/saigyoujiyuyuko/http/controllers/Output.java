@@ -81,10 +81,14 @@ public class Output implements HttpHandler{
 		if (Var.conteinerMap.get(uuid) == null) {
 			//实例化
 			Container container = new Container(uuid);
-			new Thread(container).start();
+			Thread thread = new Thread(container);
 			
 			//放入Map
 			Var.conteinerMap.put(uuid, container);
+			Var.threadMap.put(uuid, thread);
+			
+			//启动
+			thread.start();
 		}
 		
 		Container container = Var.conteinerMap.get(uuid);
