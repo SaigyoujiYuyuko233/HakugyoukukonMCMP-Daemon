@@ -9,7 +9,10 @@ import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 
 public class MainPage implements com.sun.net.httpserver.HttpHandler{
-
+	
+	/**
+	 * 欢迎页
+	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
         String response = Var.file.ReadFile("static/hello.html");

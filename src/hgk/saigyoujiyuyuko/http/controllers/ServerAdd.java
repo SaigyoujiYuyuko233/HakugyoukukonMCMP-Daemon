@@ -9,6 +9,7 @@ import java.util.Map;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import hgk.saigyoujiyuyuko.http.core.TokenV;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class ServerAdd implements HttpHandler{
@@ -61,10 +62,20 @@ public class ServerAdd implements HttpHandler{
 		
 		
 		/**
+		 * 身份验证==============================================
+		 */
+		
+		if (TokenV.Authentication(this.getMap.get("key"), exchange) == false) {
+			return;
+		}
+		
+		
+		/**
 		 * 信息获取==============================================
 		 */
 		
 		String uuid = this.getMap.get("uuid");
+		
 		
 		/**
 		 * 创建目录==============================================
