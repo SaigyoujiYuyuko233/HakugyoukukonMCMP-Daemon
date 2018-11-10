@@ -1,0 +1,97 @@
+
+				/**
+				 * Get the path================================
+				 */
+				
+				//Get path
+				this.requestPath = Var.encodingC.Utf8(this.bReader.readLine().split(" ")[1]);
+				
+				// 去掉尾部的 '/'
+				if ((this.requestPath.substring(this.requestPath.length() -1 , this.requestPath.length())).equals("/") && this.requestPath.equals("/") == false) {
+					this.requestPath = this.requestPath.substring(0, this.requestPath.length() - 1);
+				}	
+				
+				
+				/**
+				 * Get the post value================================
+				 */
+				//get all the header
+				
+				//this value is use to save the header
+				Collection<String> header = new ArrayList<String>();
+				
+				for(String i="";(i =this.bReader.readLine()) != null;) {
+					header.add(i);
+				}
+				
+				//System.out.println(header.toArray()[header.size() - 1]);
+				
+				
+				System.out.println(header.toArray()[8]);
+				
+				//获取Post
+				/*
+				if (header.toArray()[header.size() - 1] != null && header.toArray()[header.size() - 1] != "") {
+					this.post = header.toArray()[header.size() - 1];
+					
+					//split
+					String[] keyValue = this.post.split("&");
+					
+					for(int i=0; i < keyValue.length; i++) {
+						//split
+						String[] keyAndValue = keyValue[i].split("=");
+						
+						this.postMap.put(keyAndValue[0], keyAndValue[1]);
+					}
+				}*/
+
+				//Debug
+				//System.out.println(this.postMap);
+				//Var.logger.info("[qwq] => " + this.postMap.get("qwq"), Var.WARN);
+				//Var.logger.info("[test] => " + this.postMap.get("test"), Var.WARN);
+				
+				
+				/**
+				 * Get some infomation================================
+				 */
+				
+				//获取客户端信息
+				String ip = this.socket.getInetAddress().getHostName();
+				int port = this.socket.getPort();
+
+				
+				/**
+				 * Just debug================================
+				 */
+				
+				//Debug: path
+				//Var.logger.info(this.requestPath, Var.INFO);
+				
+				//Var.logger.info("[" + ip + ":" + port + "] " + this.requestPath, Var.INFO);
+				
+				
+				
+				/**
+				 * Chose or Route================================
+				 */
+				
+				switch (this.requestPath) {
+					case "/":
+						this.html = Var.hpMaker.Make("200 OK", Var.file.ReadFile("static/hello.html"));
+						break;
+						
+					case "/ServerAdd":
+						this.html = Var.hpMaker.Make("200 OK",this.postMap.getClass().getName());
+						break;
+						
+					default:
+						this.html = Var.hpMaker.Make("404 Not Found", "Can not found the controller!");
+						break;
+				}		
+				
+				
+				//Send
+				try {bWriter.write(this.html);} catch (IOException e) { Var.logger.info("读取主页失败: I/O错误", Var.ERROR); e.printStackTrace(); }
+				
+				//Log 日志输出
+				Var.logger.info(ip + ":" + port + "->6000 " + this.requestPath + " " + Var.hpMaker.getCode(), Var.INFO);

@@ -23,19 +23,11 @@ public class Main {
 		Var.key = Var.iniEditor.get("Server", "key");
 		
 		/**
-		 * GC Thread
-		 */
-		Var.logger.info("Starting the GC thread", Var.INFO);
-		new Thread(Var.gThread).start();
-		
-		/**
 		 * Start Web Server
 		 */
 		Var.logger.info("Starting the Web Server", Var.INFO);
-		
-		Var.http =new Http();
-		new Thread(Var.http).setName("Http");
-		new Thread(Var.http).start();
+		Var.http = new Http();
+		new Thread(Var.http,"Http").start();
 		
 		Var.logger.info("Server is running on port: " + Var.port, Var.INFO);
 	}

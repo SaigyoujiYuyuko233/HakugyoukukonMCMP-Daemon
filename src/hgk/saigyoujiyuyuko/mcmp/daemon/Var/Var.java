@@ -1,23 +1,21 @@
 package hgk.saigyoujiyuyuko.mcmp.daemon.Var;
 
-import java.net.ServerSocket;
+import com.sun.net.httpserver.HttpServer;
 
 import ch.ubique.inieditor.IniEditor;
 import hgk.saigyoujiyuyuko.http.core.Http;
-import hgk.saigyoujiyuyuko.http.core.HttpProtocolMaker;
+import hgk.saigyoujiyuyuko.mcmp.daemon.tools.EncodingConversion;
 import hgk.saigyoujiyuyuko.mcmp.daemon.tools.File;
-import hgk.saigyoujiyuyuko.mcmp.daemon.tools.GcThread;
 import hgk.saigyoujiyuyuko.mcmp.daemon.tools.Logger;
 
 public class Var {
 	/**
 	 *========= Tools=================
 	 */
-	public static Logger logger = new Logger();
-	public static IniEditor iniEditor = new IniEditor();
-	public static File file = new File();
-	public static HttpProtocolMaker hpMaker = new HttpProtocolMaker();
-	public static GcThread gThread = new GcThread();
+	public static final Logger logger = new Logger();
+	public static final IniEditor iniEditor = new IniEditor();
+	public static final File file = new File();
+	public static final EncodingConversion encodingC =new EncodingConversion();
 	
 	
 	/**
@@ -37,7 +35,7 @@ public class Var {
 	/**
 	 *========= Class=================
 	 */
-	public static ServerSocket serverSocket = null;
+	public static HttpServer httpServer = null;
 	
 	//Http
 	public static Http http = null;
