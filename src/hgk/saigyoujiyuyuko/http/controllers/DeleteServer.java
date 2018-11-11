@@ -86,7 +86,7 @@ public class DeleteServer implements HttpHandler{
 		 */
 		
 		//停止服务器
-		Var.conteinerMap.get(uuid).send("^C");
+		Var.conteinerMap.get(uuid).getProcess().destroy();
 		
 		//停止线程
 		Var.threadMap.get(uuid).stop();
