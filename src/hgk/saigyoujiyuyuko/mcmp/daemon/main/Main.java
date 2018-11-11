@@ -1,23 +1,12 @@
 package hgk.saigyoujiyuyuko.mcmp.daemon.main;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 import hgk.saigyoujiyuyuko.http.core.Http;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		/**
-		 * Code
-		 */
-		
-		Process process = Runtime.getRuntime().exec("cmd");
-		BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-		bWriter.write("chcp 65001");
-		bWriter.close();
-		
 		/**
 		 * Main
 		 */
