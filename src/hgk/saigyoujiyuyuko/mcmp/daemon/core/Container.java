@@ -47,8 +47,8 @@ public class Container implements Runnable{
 			 * 创建流
 			 */
 			
-			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream()));
-			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "UTF-8"));
+			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(),"gbk"));
+			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "gbk"));
 			
 			
 			/**
@@ -66,7 +66,7 @@ public class Container implements Runnable{
 			
 			//Cd 到目录
 			this.bWriter.write("cd Servers/"+uuid+" \n");
-			this.bWriter.flush();  //这个是重中之重啊!!!!
+			this.bWriter.flush();  //这个是重中之重啊!!!
 			
 			//启动读线程
 			new Thread(new Reader(this.uuid)).start();

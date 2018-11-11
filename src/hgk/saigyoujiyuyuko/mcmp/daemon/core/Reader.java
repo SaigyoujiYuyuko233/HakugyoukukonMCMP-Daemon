@@ -56,9 +56,11 @@ public class Reader implements Runnable{
 				//服务器关闭
 				if (line.contains("Stopping the server") == true) {
 					container.setOP(0);
+					container.setMP(0);
 				}
 				
 				container.setOutput(output);
+				//System.out.println(line);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
