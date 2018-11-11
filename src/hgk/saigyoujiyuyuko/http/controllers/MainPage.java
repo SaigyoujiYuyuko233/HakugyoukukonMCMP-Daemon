@@ -18,7 +18,9 @@ public class MainPage implements com.sun.net.httpserver.HttpHandler{
 	public void handle(HttpExchange exchange) throws IOException {
         String response = Var.file.ReadFile("static/hello.html");
         
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.sendResponseHeaders(200, 0);
+        
         OutputStream os = exchange.getResponseBody();
         
         os.write(response.getBytes());

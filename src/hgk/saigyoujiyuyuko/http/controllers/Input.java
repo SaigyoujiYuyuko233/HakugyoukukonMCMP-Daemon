@@ -24,6 +24,7 @@ public class Input implements HttpHandler{
 		 */
 		
 		OutputStream oStream = exchange.getResponseBody();
+		exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*"); //跨域
 		exchange.sendResponseHeaders(200, 0);
 		
         String ip = exchange.getRemoteAddress().getHostString();

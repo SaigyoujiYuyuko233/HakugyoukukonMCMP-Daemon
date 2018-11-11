@@ -19,7 +19,10 @@ public class Reader implements Runnable{
 			BufferedReader bReader =container.getBR();
 			
 			for(String line="";(line=bReader.readLine()) != null;) {
-				container.setOutput(container.getOutput() + line + "<br>");
+				String output =container.getOutput() + line + "<br>";
+				
+				//String outUTF =new String(output.getBytes(),"GB2312");
+				container.setOutput(output);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
