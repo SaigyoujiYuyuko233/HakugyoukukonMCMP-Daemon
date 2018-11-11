@@ -14,6 +14,8 @@ public class Container implements Runnable{
 	Process process = null;
 	BufferedReader bReader = null;
 	BufferedWriter bWriter = null;
+	int OnlinePlayer = 0;
+	int MaxPlayer =0;
 	String uuid = "";
 	String outPut = "";
 	
@@ -91,17 +93,30 @@ public class Container implements Runnable{
 		return this.process;
 	}
 	
-	public BufferedWriter getBW() {
-		return this.bWriter;
-	}
-	
 	public BufferedReader getBR() {
 		return this.bReader;
 	}
 	
+	public int getOP() {
+		return this.OnlinePlayer;
+	}
+	
+	public int getMP() {
+		return this.MaxPlayer;
+	}
+	
+	
 	public void send(String cmd) throws IOException {
 		this.bWriter.write(cmd+"\n");
 		this.bWriter.flush();  //这个是重中之重啊!!!!
+	}
+	
+	public void setOP(int op) {
+		this.OnlinePlayer = op;
+	}
+	
+	public void setMP(int mp) {
+		this.MaxPlayer = mp;
 	}
 	
 	public void setOutput(String output) {

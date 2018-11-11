@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 
 import hgk.saigyoujiyuyuko.http.controllers.DeleteServer;
+import hgk.saigyoujiyuyuko.http.controllers.GetInfo;
 import hgk.saigyoujiyuyuko.http.controllers.Input;
 import hgk.saigyoujiyuyuko.http.controllers.MainPage;
 import hgk.saigyoujiyuyuko.http.controllers.Output;
@@ -29,9 +30,15 @@ public class Http implements Runnable{
 		 * 路由
 		 */
 		
+		//Main
 		Var.httpServer.createContext("/",new MainPage());
+		
+		//功能
 		Var.httpServer.createContext("/ServerAdd", new ServerAdd());
 		Var.httpServer.createContext("/ServerDelete", new DeleteServer());
+		Var.httpServer.createContext("/GetInfo", new GetInfo());
+		
+		//服务器
 		Var.httpServer.createContext("/ServerConsole/Output", new Output());
 		Var.httpServer.createContext("/ServerConsole/Input", new Input());
 
