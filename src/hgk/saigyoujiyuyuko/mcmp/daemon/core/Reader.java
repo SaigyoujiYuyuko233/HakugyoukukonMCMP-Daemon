@@ -19,8 +19,9 @@ public class Reader implements Runnable{
 			BufferedReader bReader =container.getBR();
 			
 			for(String line="";(line=bReader.readLine()) != null;) {
-				String output =container.getOutput() + line + "<br>";
 				
+				String output =container.getOutput() + line + "<br>";
+						
 				/**
 				 * 玩家人数信息
 				 */

@@ -50,8 +50,8 @@ public class Container implements Runnable{
 			 * 创建流
 			 */
 			
-			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(),"gbk"));
-			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "gbk"));
+			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(),"GBK"));
+			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "UTF-8"));
 			
 			/**
 			 * 初始化
