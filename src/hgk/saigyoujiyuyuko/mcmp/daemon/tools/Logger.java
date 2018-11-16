@@ -101,7 +101,7 @@ public class Logger {
 		System.out.println(out);
 		
 		try {
-			String FileContent = Var.file.ReadFile("log/" + this.logFile.getName());
+			String FileContent = Var.fileTools.ReadFile(this.logFile);
 			BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.logFile), "UTF-8"));
 			bWriter.write(FileContent + out);
 			bWriter.close();

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import hgk.saigyoujiyuyuko.ftp.core.ContainerFtp;
 import hgk.saigyoujiyuyuko.mcmp.daemon.Var.Var;
 
 
@@ -18,9 +19,11 @@ public class Container implements Runnable{
 	int MaxPlayer =0;
 	String uuid = "";
 	String outPut = "";
+	String pass ="";
 	
-	public Container(String uuid) {
+	public Container(String uuid,String pass) {
 		this.uuid =uuid;
+		this.pass = pass;
 	}
 	
 	
@@ -50,7 +53,6 @@ public class Container implements Runnable{
 			this.bReader =new BufferedReader(new InputStreamReader(this.process.getInputStream(),"gbk"));
 			this.bWriter =new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream(), "gbk"));
 			
-			
 			/**
 			 * 初始化
 			 */
@@ -70,6 +72,15 @@ public class Container implements Runnable{
 			
 			//启动读线程
 			new Thread(new Reader(this.uuid)).start();
+			
+			
+			/**
+			 * 启动Ftp
+			 */
+			
+			String name = uuid.split("-")[0];
+			new ContainerFtp().addUser(name, this.pass, "Servers/" + uuid);
+			
 			
 		} catch (IOException e) {Var.logger.info("容器 I/O异常", Var.ERROR);e.printStackTrace();}
 	}

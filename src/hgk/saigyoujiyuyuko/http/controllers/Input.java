@@ -79,6 +79,7 @@ public class Input implements HttpHandler{
 		
 		String uuid = this.getMap.get("uuid");	//uuid
 		String cmd = this.getMap.get("cmd");	//命令
+		String ftpPass = this.getMap.get("ftpPass");	//ftp
 		
 		
 		/**
@@ -88,7 +89,7 @@ public class Input implements HttpHandler{
 		//线程未启动
 		if (Var.conteinerMap.get(uuid) == null) {
 			//实例化
-			Container container = new Container(uuid);
+			Container container = new Container(uuid,ftpPass);
 			Thread thread = new Thread(container);
 			
 			//放入Map

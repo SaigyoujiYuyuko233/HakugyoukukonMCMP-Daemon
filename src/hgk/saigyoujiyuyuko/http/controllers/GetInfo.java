@@ -75,6 +75,7 @@ public class GetInfo implements HttpHandler {
 		 */
 		
 		String uuid = this.getMap.get("uuid");	//uuid
+		String ftpPass = this.getMap.get("ftpPass");	//ftp
 		
 		/**
 		 * 线程状态
@@ -82,7 +83,7 @@ public class GetInfo implements HttpHandler {
 		
 		if (Var.conteinerMap.get(uuid) == null) {
 			//实例化
-			Container container = new Container(uuid);
+			Container container = new Container(uuid,ftpPass);
 			Thread thread = new Thread(container);
 			
 			//放入Map

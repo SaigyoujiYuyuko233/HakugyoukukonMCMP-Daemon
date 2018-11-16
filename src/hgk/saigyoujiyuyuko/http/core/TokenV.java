@@ -1,5 +1,6 @@
 package hgk.saigyoujiyuyuko.http.core;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -22,7 +23,7 @@ public class TokenV {
 		if (Key.equals(Var.key) == false) {	
 			//send massage
 	        OutputStream os = exchange.getResponseBody();
-	        String response = Var.file.ReadFile("static/AuthFail.html");
+	        String response = Var.fileTools.ReadFile(new File("static/AuthFail.html"));
 	        
 	        os.write(response.getBytes());
 	        os.close();

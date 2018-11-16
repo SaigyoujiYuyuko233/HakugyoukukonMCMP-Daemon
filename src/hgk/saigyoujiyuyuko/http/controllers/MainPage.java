@@ -1,5 +1,6 @@
 package hgk.saigyoujiyuyuko.http.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -16,7 +17,7 @@ public class MainPage implements com.sun.net.httpserver.HttpHandler{
 	@SuppressWarnings("unused")
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-        String response = new String(Var.file.ReadFile("static/hello.html").getBytes(), "UTF-8");
+        String response = new String(Var.fileTools.ReadFile(new File("static/hello.html")).getBytes(), "UTF-8");
         
         exchange.sendResponseHeaders(200, 0);
         
